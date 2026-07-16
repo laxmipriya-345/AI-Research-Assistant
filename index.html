@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Research Assistant</title>
+<link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <h1>🔎 Research Assistant</h1>
+      <button id="newSessionBtn" class="primary-btn">+ New Session</button>
+      <div id="sessionList" class="session-list"></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div id="sessionTitle">No session selected</div>
+        <div class="toggles">
+          <label><input type="checkbox" id="toggleWeb" checked> Web Search</label>
+          <label><input type="checkbox" id="toggleDocs" checked> Documents</label>
+        </div>
+      </header>
+
+      <section class="chat-area" id="chatArea"></section>
+
+      <form id="chatForm" class="chat-input">
+        <input type="text" id="chatInput" placeholder="Ask a research question..." autocomplete="off" />
+        <button type="submit">Send</button>
+      </form>
+    </main>
+
+    <aside class="right-panel">
+      <div class="panel-block">
+        <h2>📄 Documents</h2>
+        <input type="file" id="fileInput" />
+        <div id="docList" class="doc-list"></div>
+      </div>
+      <div class="panel-block">
+        <h2>📝 Research Notes</h2>
+        <div id="notesList" class="notes-list"></div>
+        <button id="addNoteBtn" class="secondary-btn">+ Add Note</button>
+      </div>
+    </aside>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
