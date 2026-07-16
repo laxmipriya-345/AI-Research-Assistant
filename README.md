@@ -1,81 +1,176 @@
-# AI Research Assistant
+# 🤖 AI Research Assistant
 
-A full-stack research assistant with:
+An intelligent AI-powered research assistant that helps users perform efficient research by combining **document-based question answering, web search, conversation memory, multi-step reasoning, and research note management**. The assistant is designed to streamline the research workflow by allowing users to interact with documents, gather information from the web, retain conversational context, and organize findings in one place.
 
-- **Chat with Documents** — upload PDF/DOCX/TXT files; the agent retrieves relevant passages via TF-IDF search (no embedding API needed).
-- **Web Search Tool** — the agent can search the live web (DuckDuckGo, no API key required) when it needs current information.
-- **Conversation Memory** — each session's chat history is stored in SQLite; older turns are auto-summarized so long sessions stay coherent without blowing up context.
-- **Multi-step Reasoning** — the agent runs an iterative tool-use loop (web search → document search → save note → ...) before producing a final answer, up to a configurable step limit.
-- **Research Notes** — save findings manually or let the agent save them for you via the `save_note` tool; notes persist per session.
+---
 
-## Stack
+## 🚀 Features
 
-- Backend: Python, FastAPI, SQLite, Anthropic SDK
-- Frontend: plain HTML/CSS/JS (no build step)
+### 📄 Chat with Documents
 
-## Project Structure
+* Upload research papers, reports, or text documents.
+* Ask questions about uploaded documents.
+* Extract important information quickly.
+* Context-aware responses based on document content.
 
-```
-ai-research-assistant/
-├── backend/
-│   ├── main.py          # FastAPI app & routes
-│   ├── agent.py         # multi-step reasoning + tool-use loop
-│   ├── memory.py        # conversation memory (SQLite)
-│   ├── documents.py     # document ingestion + TF-IDF retrieval
-│   ├── web_search.py    # web search tool
-│   ├── notes.py         # research notes CRUD
-│   ├── models.py        # Pydantic schemas
-│   └── config.py        # settings
-├── frontend/
-│   ├── index.html
-│   ├── style.css
-│   └── app.js
-├── data/                 # created at runtime (SQLite DB + uploads)
-├── requirements.txt
-├── .env.example
+### 🌐 Web Search Tool
+
+* Search the web for the latest information.
+* Retrieve relevant sources for research.
+* Combine document knowledge with online information.
+
+### 🧠 Conversation Memory
+
+* Remembers previous interactions.
+* Maintains context throughout the conversation.
+* Enables follow-up questions without repeating information.
+
+### 🔍 Multi-step Reasoning
+
+* Breaks complex problems into smaller reasoning steps.
+* Performs logical analysis before generating answers.
+* Improves response accuracy for research-related tasks.
+
+### 📝 Research Notes
+
+* Save important findings during conversations.
+* Organize notes for future reference.
+* Build a structured research summary.
+
+---
+
+## 📂 Project Structure
+
+```text
+AI-Research-Assistant/
+│── agent.py              # AI agent logic
+│── app.js                # Frontend JavaScript
+│── config.py             # Configuration settings
+│── documents.py          # Document processing module
+│── index.html            # User interface
+│── LICENSE
+│── main.py               # Application entry point
+│── memory.py             # Conversation memory
+│── models.py             # AI model configuration
+│── notes.py              # Research notes management
+│── style.css             # UI styling
+│── web_search.py         # Web search functionality
 └── README.md
 ```
 
-## Setup
+---
 
-1. **Install dependencies**
+## 🛠️ Technologies Used
 
-   ```bash
-   cd ai-research-assistant
-   python -m venv venv
-   source venv/bin/activate   # Windows: venv\Scripts\activate
-   pip install -r requirements.txt
-   ```
+* Python
+* HTML5
+* CSS3
+* JavaScript
+* Large Language Models (LLMs)
+* Document Processing
+* Web Search Integration
 
-2. **Configure your API key**
+---
 
-   ```bash
-   cp .env.example .env
-   # edit .env and set ANTHROPIC_API_KEY=sk-ant-...
-   ```
+## ⚙️ Installation
 
-3. **Run the server**
+### 1. Clone the repository
 
-   ```bash
-   cd backend
-   uvicorn main:app --reload --port 8000
-   ```
+```bash
+git clone https://github.com/laxmipriya-345/AI-Research-Assistant.git
+```
 
-4. **Open the app**
+### 2. Navigate to the project directory
 
-   Visit `http://localhost:8000` in your browser.
+```bash
+cd AI-Research-Assistant
+```
 
-## How it works
+### 3. Install dependencies
 
-1. Create a session in the sidebar.
-2. Optionally upload documents (PDF/DOCX/TXT) — they're chunked and indexed for retrieval.
-3. Ask a question in the chat box. Toggle "Web Search" / "Documents" on or off per message.
-4. The agent (`backend/agent.py`) runs a loop: it may call `web_search`, `search_documents`, and/or `save_note` multiple times, reasoning over the results, before giving you a final answer. Each tool call is shown as a collapsed trail above the answer.
-5. Notes appear in the right panel and persist across sessions (view/delete anytime).
+```bash
+pip install -r requirements.txt
+```
 
-## Notes & Extending
+### 4. Run the application
 
-- Swap `documents.py`'s TF-IDF retrieval for a real embedding model/vector DB if you need semantic search at scale.
-- `web_search.py` uses the `ddgs` package; swap in Bing/Google/Tavily/Serper if you have an API key and want more robust results.
-- `MAX_REASONING_STEPS` and `MEMORY_SUMMARY_TRIGGER` in `.env` control how many tool-call rounds the agent gets and how aggressively memory gets summarized.
-- The DB is a single SQLite file at `data/app.db` — fine for local/single-user use; swap for Postgres if you need multi-user concurrency.
+```bash
+python main.py
+```
+
+---
+
+## 💻 Usage
+
+1. Start the application.
+2. Upload a document for analysis.
+3. Ask questions about the document.
+4. Search the web for additional information.
+5. Continue conversations with memory support.
+6. Save important findings as research notes.
+
+---
+
+## 📸 Demo Workflow
+
+```text
+Upload Document
+        │
+        ▼
+Chat with AI
+        │
+        ▼
+Web Search (Optional)
+        │
+        ▼
+Multi-step Reasoning
+        │
+        ▼
+Save Research Notes
+        │
+        ▼
+Continue with Conversation Memory
+```
+
+---
+
+## 🌟 Future Improvements
+
+* PDF, DOCX, and PPT support
+* Semantic document search
+* Citation generation (APA, MLA, IEEE)
+* Voice-based interaction
+* Multi-document comparison
+* Export notes as PDF or Markdown
+* Cloud storage integration
+* User authentication
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repository.
+2. Create a new feature branch.
+3. Commit your changes.
+4. Push to your branch.
+5. Open a Pull Request.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 👩‍💻 Author
+
+**Laxmipriya Rout**
+
+GitHub: https://github.com/laxmipriya-345
+
+---
+
+⭐ If you found this project useful, consider giving it a star on GitHub!
